@@ -1,0 +1,20 @@
+form {
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+}
+
+label {
+  margin-right: 10px;
+}
+
+.input-group {
+  margin-bottom: 10px;
+  width: 200px;
+  display: flex;
+  justify-content: space-between;
+}
+
+button {
+  margin-top: 10px;
+}
