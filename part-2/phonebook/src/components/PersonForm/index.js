@@ -1,4 +1,4 @@
-const PersonForm = ({ handleAdd, newName, setNewName, newPhone, setNewPhone }) => {
+const PersonForm = ({ handleAdd, newName, setNewName, newNumber, setNewNumber }) => {
   return (
     <form onSubmit={handleAdd}>
       <div className="input-group">
@@ -7,8 +7,8 @@ const PersonForm = ({ handleAdd, newName, setNewName, newPhone, setNewPhone }) =
       </div>
       
       <div className="input-group">
-        <label htmlFor="phone">Phone</label>
-        <input id="phone" value={newPhone} onChange={(event) => setNewPhone(event.target.value)} />
+        <label htmlFor="number">Number</label>
+        <input id="number" value={newNumber} onChange={(event) => setNewNumber(event.target.value)} />
       </div>
 
       <button type="submit">add</button>

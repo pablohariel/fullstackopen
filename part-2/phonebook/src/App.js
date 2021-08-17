@@ -12,7 +12,7 @@ import './App.css'
 function App() {
   const [persons, setPersons] = useState([])
   const [newName, setNewName] = useState('')
-  const [newPhone, setNewPhone] = useState('')
+  const [newNumber, setNewNumber] = useState('')
   const [filterValue, setFilterValue] = useState('')
 
   const [notification, setNotification] = useState(false)
@@ -29,7 +29,7 @@ function App() {
 
     const newPerson = {
       name: newName,
-      phone: newPhone
+      number: newNumber
     }
 
     if(alreadyExists !== undefined) {
@@ -98,8 +98,8 @@ function App() {
         handleAdd={handleAdd} 
         newName={newName} 
         setNewName={setNewName} 
-        newPhone={newPhone} 
-        setNewPhone={setNewPhone} 
+        newNumber={newNumber} 
+        setNewNumber={setNewNumber} 
       />
       
       <h2>Numbers</h2>
