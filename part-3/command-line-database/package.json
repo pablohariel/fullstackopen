@@ -1,0 +1,11 @@
+{
+  "name": "command-line-database",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "mongoose": "^5.13.7"
+  }
+}

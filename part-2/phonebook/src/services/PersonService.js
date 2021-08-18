@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const api = axios.create({
-  baseURL: 'https://pablohariel-phonebook.herokuapp.com/api/notes'
+  baseURL: '/api/notes'
 })
 
 const personService = {
