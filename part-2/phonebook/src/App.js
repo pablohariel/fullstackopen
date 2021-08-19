@@ -1,16 +1,16 @@
 import { useState, useEffect } from 'react'
 
-import { personService } from './services/PersonService'
+import { contactService } from './services/ContactService'
 
 import { SearchFilter } from './components/SearchFilter'
-import { PersonForm } from './components/PersonForm'
+import { ContactForm } from './components/ContactForm'
 import { NumberList } from './components/NumberList'
 import { NotificationMessage } from './components/NotificationMessage'
 
 import './App.css'
 
 function App() {
-  const [persons, setPersons] = useState([])
+  const [contacts, setContacts] = useState([])
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [filterValue, setFilterValue] = useState('')
@@ -18,16 +18,16 @@ function App() {
   const [notification, setNotification] = useState(false)
 
   useEffect(() => {
-    personService.get().then(response => setPersons(response))
+    contactService.get().then(response => setContacts(response))
   }, [])
 
-  const filteredPersons = filterValue ? persons.filter(person => person.name.toLowerCase().includes(filterValue.toLowerCase())) : []
+  const filteredContacts = filterValue ? contacts.filter(contact => contact.name.toLowerCase().includes(filterValue.toLowerCase())) : []
 
   const handleAdd = (event) => {
     event.preventDefault()
-    const alreadyExists = persons.find(person => person.name === newName)
+    const alreadyExists = contacts.find(contact => contact.name === newName)
 
-    const newPerson = {
+    const newContact = {
       name: newName,
       number: newNumber
     }
@@ -37,17 +37,17 @@ function App() {
 
       if(!result) return
 
-      personService.update(alreadyExists.id, newPerson)
+      contactService.update(alreadyExists._id, newContact)
         .then(response => {
-          setPersons([...persons.filter(person => person.id !== alreadyExists.id), response])
+          setContacts([...contacts.filter(contact => contact._id !== alreadyExists._id), response])
 
-          setNotification({ message: 'User updated', type: 'success' })
+          setNotification({ message: 'Contact updated', type: 'success' })
           setTimeout(() => {
             setNotification(null)
           }, 5000)
         })
         .catch(() => {
-          setNotification({ message: 'User already deleted', type: 'error' })
+          setNotification({ message: 'Contact already deleted', type: 'error' })
           setTimeout(() => {
             setNotification(null)
           }, 5000)
@@ -56,10 +56,10 @@ function App() {
       return
     }
 
-    personService.create(newPerson)
+    contactService.create(newContact)
       .then(response => {
-        setPersons([...persons, response])
-        setNotification({ message: 'User added', type: 'success' })
+        setContacts([...contacts, response])
+        setNotification({ message: 'Contact added', type: 'success' })
         setTimeout(() => {
           setNotification(null)
         }, 5000)
@@ -69,17 +69,18 @@ function App() {
   const handleDelete = (id) => {
     const result = window.confirm('Delete person?')
     if(result) {
-      personService.delete(id)
+      contactService.delete(id)
         .then(() => {
-          setPersons(persons.filter(person => person.id !== id))
+          setContacts(contacts.filter(contact => contact._id !== id))
 
-          setNotification({ message: 'User deleted', type: 'success' })
+          setNotification({ message: 'Contact deleted', type: 'success' })
           setTimeout(() => {
             setNotification(null)
           }, 5000)
         })
-        .catch(() => {
-          setNotification({ message: 'User already deleted', type: 'error' })
+        .catch((err) => {
+          console.log(err)
+          setNotification({ message: 'Contact already deleted', type: 'error' })
           setTimeout(() => {
             setNotification(null)
           }, 5000)
@@ -94,7 +95,7 @@ function App() {
       <SearchFilter filterValue={filterValue} setFilterValue={setFilterValue} />
 
       <h2>Phonebook</h2>
-      <PersonForm 
+      <ContactForm 
         handleAdd={handleAdd} 
         newName={newName} 
         setNewName={setNewName} 
@@ -103,7 +104,7 @@ function App() {
       />
       
       <h2>Numbers</h2>
-      <NumberList filterValue={filterValue} persons={persons} filteredPersons={filteredPersons} handleDelete={handleDelete} />
+      <NumberList filterValue={filterValue} contacts={contacts} filteredContacts={filteredContacts} handleDelete={handleDelete} />
     </div>
   );
 }

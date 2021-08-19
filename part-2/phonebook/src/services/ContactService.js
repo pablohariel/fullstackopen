@@ -1,20 +1,20 @@
 import axios from 'axios'
 
 const api = axios.create({
-  baseURL: '/api/notes'
+  baseURL: '/api/contacts'
 })
 
-const personService = {
+const contactService = {
   get: () => {
     const request = api.get()
     return request.then(response => response.data)
   },
-  create: (person) => {
-    const request = api.post('', person)
+  create: (contact) => {
+    const request = api.post('', contact)
     return request.then(response => response.data)
   },
-  update: (id, person) => {
-    const request = api.put(`/${id}`, person)
+  update: (id, contact) => {
+    const request = api.put(`/${id}`, contact)
     return request.then(response => response.data)
   },
   delete: (id) => {
@@ -23,4 +23,4 @@ const personService = {
   }
 }
 
-export { personService }
+export { contactService }

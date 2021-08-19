@@ -1,4 +1,4 @@
-const PersonForm = ({ handleAdd, newName, setNewName, newNumber, setNewNumber }) => {
+const ContactForm = ({ handleAdd, newName, setNewName, newNumber, setNewNumber }) => {
   return (
     <form onSubmit={handleAdd}>
       <div className="input-group">
@@ -17,4 +17,4 @@ const PersonForm = ({ handleAdd, newName, setNewName, newNumber, setNewNumber })
   
 }
 
-export { PersonForm }
+export { ContactForm }

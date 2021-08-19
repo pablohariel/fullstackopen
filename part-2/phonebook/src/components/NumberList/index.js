@@ -1,14 +1,21 @@
-const NumberList = ({ filterValue, persons, filteredPersons, handleDelete }) => {
+const NumberList = ({ filterValue, contacts, filteredContacts, handleDelete }) => {
   return (
     <ul>
       { 
-        filterValue ? filteredPersons.map(person => <li key={person.name}>{person.name}  {person.number}</li>) 
+        filterValue ? filteredContacts.map(contact => {
+          return <li key={contact._id}>
+            <div>
+              {contact.name}  {contact.number}
+              <button onClick={() => handleDelete(contact._id)}>delete</button>
+            </div>
+          </li>
+        }) 
         : 
-        persons.map(person => {
-          return <li key={person.name}>
+        contacts.map(contact => {
+          return <li key={contact._id}>
               <div>
-                {person.name}  {person.number}   
-                <button onClick={() => handleDelete(person.id)}>delete</button>
+                {contact.name}  {contact.number}   
+                <button onClick={() => handleDelete(contact._id)}>delete</button>
               </div>
             </li>
         })
