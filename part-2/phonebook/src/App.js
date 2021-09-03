@@ -46,8 +46,9 @@ function App() {
             setNotification(null)
           }, 5000)
         })
-        .catch(() => {
-          setNotification({ message: 'Contact already deleted', type: 'error' })
+        .catch(error => {
+          console.log(error)
+          setNotification({ message: error.response.data.error, type: 'error' })
           setTimeout(() => {
             setNotification(null)
           }, 5000)
@@ -60,6 +61,12 @@ function App() {
       .then(response => {
         setContacts([...contacts, response])
         setNotification({ message: 'Contact added', type: 'success' })
+        setTimeout(() => {
+          setNotification(null)
+        }, 5000)
+      })
+      .catch(error => {
+        setNotification({ message: error.response.data.error, type: 'error' })
         setTimeout(() => {
           setNotification(null)
         }, 5000)
